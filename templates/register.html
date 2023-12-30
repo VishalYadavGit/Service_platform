@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Signup{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container1">
+    <div class="container2">
+        <h2>Signup</h2>
+        <form method="post">
+          {% csrf_token %}
+
+         <div class="mt-1">
+            {{ form.username.label_tag }}
+            <br>
+            {{ form.username }}
+         </div>
+         
+          <div class="mt-1">
+            {{ form.email.label_tag }}
+          <br>
+          {{ form.email }}
+          </div>
+          
+          <div class="mt-1">
+            {{ form.password.label_tag }}
+          <br>
+          {{ form.password }}
+          </div>
+          
+          <div class="mt-1">
+            {{ form.confirm_password.label_tag }}
+          <br>
+          {{ form.confirm_password }}
+          </div>
+          
+          <button class="signup-button" type="submit">Signup</button>
+        </form>
+        
+      </div>
+
+  <div class="container3">
+    <lottie-player src="{% static 'animations\signup.json' %}" background="transparent" speed="1"
+    style="width: 70%; height: 50%;" loop autoplay></lottie-player>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.7.4/lottie.min.js"></script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+{% endblock %}

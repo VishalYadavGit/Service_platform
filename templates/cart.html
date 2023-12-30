@@ -1,0 +1,11 @@
+<!-- cart.html -->
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Your Cart</h1>
+    <div>
+        {% for item in cart_items %}
+            {{ item.service.name }} - Quantity: {{ item.quantity }}<br>
+            <!-- Add other item details as needed -->
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}About {% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/about.css'%}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<link
+href="https://fonts.googleapis.com/css2?family=Merienda:wght@400;700&family=Open+Sans:wght@300&family=Poppins:wght@400;500;600&display=swap"
+rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+
+{% endblock %}
+{% block content %}
+
+<div class="my-5 px-4">
+    <h1 class="fw-bold h-font text-center underlined-text">About Us</h1>
+    <!-- add a underline below the about us -->
+    <!-- <div class="underline"></div> -->
+
+
+</div>
+<div class="container">
+    <div class="row justify-content-between align-items-center">
+        <div class="col-lg-6 col-md-5 mb-4 order-lg-1 order-md-1 order-2">
+            <h3 class="mb-3" style="color: #13315C;">Conquer Your Home Repairs</h3>
+            <div class="about-text">
+                Meet the masters of electricians and plumbers at your fingertips! Our platform connects you with the
+                finest professionals in the industry who are eager to fix it all.
+            </div>
+            <div class="about-text">
+                Our experts are rigorously tested and certified, ensuring you receive the highest quality of service. No
+                more DIY messes, leave it to the pros.
+            </div>
+            <div class="about-text">
+                We provide seamless booking and competitive pricing, taking the stress out of home repairs. Your
+                satisfaction is our priority.
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-5 mb-4 order-lg-2 order-md-2 order-1">
+            <img src="/website/static/images/about/about.jpg" class="w-100">
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Why Choose Us</h2>
+    <div class="row">
+        <div class="col-sm-4 col-12">
+            <figure>
+                <img src="{% static 'assets/icon_reliable.png' %}" class="center" alt="icon" loading="lazy">
+            </figure>
+            <h5 class="text-center">Experienced and Reliable</h5>
+            <p class="text-center"> We're not an agency, but a young startup run by a passionate group of professionals.
+                We train our workers at certified training centers.</p>
+        </div>
+        <div class="col-sm-4 col-12">
+            <figure>
+                <img src="{% static 'assets/icon_affordable.png' %}" class="center" alt="icon" loading="lazy">
+            </figure>
+            <h5 class="text-center">Transparent Pricing</h5>
+            <p class="text-center">You get what you pay for. Additionally, you get replacement guarantee, Covid-19 test
+                reports, verification documents and more!</p>
+        </div>
+        <div class="col-sm-4 col-12">
+            <figure>
+                <img src="{% static 'assets/icon_customer.png' %}" class="center" alt="icon" loading="lazy">
+            </figure>
+            <h5 class="text-center">Customer Support</h5>
+            <p class="text-center"> Our executives will always be there to hear you out and solve your issues</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4 px-4">
+            <div class="box">
+                <img src="{% static 'images/experts.png' %}" width="70px">
+                <h5 class="mt-3">500+</h5>
+                <p>Experts Ready to Serve</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4 px-4">
+            <div class="box">
+                <img src="{% static 'images/customers.svg' %}" width="70px">
+                <h5 class="mt-3">3000+</h5>
+                <p>Happy Customers Served</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mb-4 px-4">
+            <div class="box">
+                <img src="{% static 'images/hours.png' %}" width="70px">
+                <h5 class="mt-3">12h</h5>
+                <p>Average Job Completion</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<h3 class="my-5 fw-bold h-font text-center">Management Team</h3>
+<div class="container px-4">
+    <!-- Swiper -->
+    <div class="swiper mySwiper">
+        <div class="swiper-wrapper mb-5">
+            <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+                <img src="{% static 'images/about/manager_1.jpg' %}" width="w-100" height="250px">
+                <h5 class="mt-2 ">Manager 1</h5>
+            </div>
+            <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+                <img src="{% static 'images/about/manager1.jpg' %}" width="w-100" height="250px">
+                <h5 class="mt-2 ">Manager 2</h5>
+            </div>
+            <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+                <img src="{% static 'images/about/manager2.jpg' %}" width="w-100" height="250px">
+                <h5 class="mt-2">Manager 3</h5>
+            </div>
+            <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+                <img src="{% static 'images/about/manager3.jpg' %}" width="w-100" height="250px">
+                <h5 class="mt-2">Manager 4</h5>
+            </div>
+            <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+                <img src="{% static 'images/about/manager4.jpg' %}" width="w-100" height="250px">
+                <h5 class="mt-2">Manager 5</h5>
+            </div>
+            <div class="swiper-slide bg-white text-center overflow-hidden rounded">
+                <img src="{% static 'images/about/manager5.jpg' %}" width="w-100" height="250px">
+                <h5 class="mt-2">Manager 6</h5>
+            </div>
+        </div>
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+    </div>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            loop: true,
+            spaceBetween: 40,
+
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            breakpoints: {
+                320: {
+                    slidesPerView: 1,
+                },
+                640: {
+                    slidesPerView: 1,
+                },
+                768: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                }
+            }
+        });
+    </script>
+
+
+{% endblock %}

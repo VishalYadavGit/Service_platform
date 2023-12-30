@@ -1,0 +1,108 @@
+.container1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.container1 .card {
+    /* background-color: blue; */
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    position: relative;
+}
+
+.container2 {
+    width: 60%;
+    height: 100%;
+    background-color: #fff;
+    margin: 20px;
+    margin-left: 69px;
+    padding: 40px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    /* Add box shadow here */
+}
+
+.login-input {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px 0;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+}
+
+
+.or-divider {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.or-divider::before,
+.or-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #ccc;
+    margin: 0 10px;
+}
+
+.or-text {
+    padding: 0 10px;
+    color: #777;
+}
+
+.google-login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    color: #4285F4;
+    border: 1px solid #4285F4;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.google-logo {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.container3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

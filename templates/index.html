@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+<!-- "Home will pass as a title in base.html" -->
+<!-- To add more css for each individual page, we use block head(name) -->
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/index.css'%}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css" rel="stylesheet">
+
+{% endblock %}
+{% block content %}
+<section class="one">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="margin: 5rem 0;">
+                <button class="hub">Electric-Plumb Hub</button>
+                <h1>Wiring, <br>Drains, <br>and <br>more</h1>
+                <button class="hub">Book Now</button>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'img/plumbtric.jpg' %}" alt="plumbtric">
+            </div>
+        </div>
+    </div>
+
+</section>
+<section class="two ">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 center" >
+                <img src="{% static 'assets/home_page/electrician.webp' %}" alt="plumbtric">
+            </div>
+            <div class="col-md-6"  style="margin: auto auto;">
+                <h2 class="title">Reliable Electricians <br> for Various needs</h2>
+                <h5>Our electricians are skilled in wiring installations, circuit repairs, lighting solutions, and safety inspections. Book an appointment with our experts today!</h5>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="three">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6" style="margin: 5rem 0;">
+                
+                <h2 class="title">Fast and Efficient <br> Plumbing Solutions</h2>
+                <h5>From pipe repairs and drain cleaning to fixture installations and emergency plumbing, our plumbers have got you covered. Schedule a plumber right away!</h5>
+            </div>
+            <div class="col-md-6">
+                <img src="{% static 'assets/home_page/plumber.webp' %}" alt="plumbtric">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="four">
+    <!-- align center -->
+    <h2 class="title text-center">Ready Yet?</h2>
+    <h5>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Numquam repellendus hic tenetur minus!</h5>
+    <!-- add a button with class hub and center it -->
+    <div class="text-center">
+        <button class="hub">Book Now</button>
+    </div>
+
+</section>
+<section class="five testimonal">
+    <!-- align center -->
+    <h2 class="title pt-4 mb-4 text-center fw-bold h-font">Our Testimonals</h2>
+
+    <div class="center-container">
+        <div class="container">
+
+            <div class="row">
+                <div class="clients-carousel owl-carousel">
+                    <div class="single-box">
+                        <div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/3525908/pexels-photo-3525908.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+                        <div class="content">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+                            <h4>Jason Doe</h4>
+                            <h6>Designation Here</h6>
+                        </div>
+                    </div>
+                    <div class="single-box">
+                        <div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/5042302/pexels-photo-5042302.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+                        <div class="content">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+                            <h4>Dave Wood</h4>
+                            <h6>Designation Here</h6>
+                        </div>
+                    </div>
+                    <div class="single-box">
+                        <div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/3211476/pexels-photo-3211476.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+                        <div class="content">
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+                            <h4>Matt Demon</h4>
+                            <h6>Designation Here</h6>
+                        </div>
+                    </div>
+                    <div class="single-box">
+                        <div class="img-area"><img alt="" class="img-fluid" src="https://images.pexels.com/photos/1270076/pexels-photo-1270076.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"></div>
+                        <div class="content">
+                            <span class="rating-star"><i class="icofont-star"></i><i class="icofont-star"></i><i class="icofont-star"></i><i class="icofont-star"></i><i class="icofont-star"></i></span>
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, doloribus minima praesentium laborum ea earum."</p>
+                            <h4>jimmy kimmel</h4>
+                            <h6>Designation Here</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+</script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.min.js">
+</script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.min.js">
+</script> 
+<script>
+       $('.clients-carousel').owlCarousel({
+           loop: true,
+           nav: false,
+           autoplay: false,
+           autoplayTimeout: 5000,
+           animateOut: 'fadeOut',
+           animateIn: 'fadeIn',
+           smartSpeed: 450,
+           margin: 30,
+           responsive: {
+               0: {
+                   items: 1
+               },
+               768: {
+                   items: 2
+               },
+               991: {
+                   items: 3
+               },
+               1200: {
+                   items: 3
+               },
+               1920: {
+                   items: 4
+               }
+           }
+       });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+<script src="{% static 'js/testimonals.js' %}"></script>
+
+{% endblock %}
