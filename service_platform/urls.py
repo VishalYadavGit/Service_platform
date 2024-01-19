@@ -18,5 +18,6 @@ urlpatterns = [
     # path("logout",views.logout_view,name = "logout")
      path('add_to_cart/<int:service_id>/', add_to_cart, name='add_to_cart'),
     path('view_cart/', view_cart, name='view_cart'),
+    path('detectit',views.detectit,name = 'detectit'),
 ]
 

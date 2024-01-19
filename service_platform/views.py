@@ -2,11 +2,11 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
 # from django.contrib.auth import logout
-from .models import Service, Cart
+from .models import Service, Cart, Booking
 # Create your views here.
 from .forms import  SignupForm, LoginForm
 # views.py
-
+from . import opencv
 from .models import Service
 
 def index(request):
@@ -77,7 +77,10 @@ def view_cart(request):
     return render(request, 'cart.html', {'cart_items': cart_items})
 
 def book(request):
-    return render(request,'book.html')
+    if request.user.is_authenticated:
+        return render(request,'book.html')
+    else:
+        return redirect('login')
 
 
 def register(request):
@@ -157,3 +160,25 @@ def register(request):
         form = SignupForm()
 
     return render(request, 'register.html', {'form': form})
+
+def detectit(request):
+    if request.method=='POST':
+        user_id = request.user.id
+        name=request.POST['name']
+        email=request.POST['email']
+        phone=request.POST['phone']
+        picture=request.FILES['picture']
+        address=request.POST['address']
+        pincode=request.POST['pincode']
+        print(user_id,name,email,phone,picture,address,pincode)
+        instance=Booking.objects.create(user_id=user_id,name=name,email=email,phone=phone,picture=picture,address=address,pincode=pincode)
+        instance.save()
+        identified_shapes=opencv.shapes(instance.picture.path)
+        print(identified_shapes)
+        if 'Rectangle' in identified_shapes:
+            context={'job':'Electrician'}
+        else:
+            context={'job':'Plumber'}
+        return render(request,'confirmation.html',context)
+    else:
+        return redirect('book')

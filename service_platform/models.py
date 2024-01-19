@@ -21,3 +21,12 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+
+class Booking(models.Model):
+    user=models.ForeignKey(User,on_delete=models.CASCADE)
+    name=models.CharField(max_length=255)
+    email=models.EmailField()
+    phone=models.IntegerField()
+    picture=models.ImageField(upload_to='uploads/')
+    address=models.CharField(max_length=255)
+    pincode=models.IntegerField()

@@ -7,7 +7,8 @@
 {% endblock %}
 {% block content %}
 <h1>Book Now</h1>
-<form action="">
+<form action="/detectit" method='post' enctype="multipart/form-data">
+  {% csrf_token %}
     <div class="modal-header">
       <h5 class="modal-title d-flex align-items-center">
         <i class="bi bi-person-lines-fill fs-3 me-2"></i>User Registration
@@ -22,44 +23,32 @@
         <div class="row">
           <div class="col-md-6 ps-0 mb-3">
             <label class="form-label">Name</label>
-            <input type="text" class="form-control shadow-none">
+            <input type="text" Name='name' class="form-control shadow-none">
           </div>
           <div class="col-md-6 p-0 mb-3">
             <label class="form-label">Email</label>
-            <input type="email" class="form-control shadow-none">
+            <input type="email" Name='email' class="form-control shadow-none">
           </div>
           <div class="col-md-6 ps-0 mb-3">
             <label class="form-label">Phone no.</label>
-            <input type="number" class="form-control shadow-none">
+            <input type="number" Name='phone' class="form-control shadow-none">
           </div>
           <div class="col-md-6 p-0 mb-3">
             <label class="form-label">Picture</label>
-            <input type="file" class="form-control shadow-none">
+            <input type="file" accept="image/*" Name='picture' class="form-control shadow-none">
           </div>
           <div class="col-md-12 p-0 mb-3">
             <label class="form-label">Address</label>
-            <textarea class="form-control shadow-none" rows="1"></textarea>
+            <textarea class="form-control shadow-none"  Name='address' rows="1"></textarea>
           </div>
           <div class="col-md-6 ps-0 mb-3">
             <label class="form-label">PinCode</label>
-            <input type="number" class="form-control shadow-none">
-          </div>
-          <div class="col-md-6 p-0 mb-3">
-            <label class="form-label">Date of Birth</label>
-            <input type="date" class="form-control shadow-none">
-          </div>
-          <div class="col-md-6 ps-0 mb-3">
-            <label class="form-label">Password</label>
-            <input type="password" class="form-control shadow-none">
-          </div>
-          <div class="col-md-6 p-0 mb-3">
-            <label class="form-label">Confirm Password</label>
-            <input type="password" class="form-control shadow-none">
+            <input type="number" Name='pincode' class="form-control shadow-none">
           </div>
         </div>
       </div>
       <div class="text-center my-1">
-        <button type="submit" class="btn btn-dark shadow-none">Register</button>
+        <button type="submit" class="btn btn-dark shadow-none">Book</button>
       </div>
     </div>
   </form>
