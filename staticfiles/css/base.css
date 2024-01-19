@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    scroll-behavior: smooth;
+}
+
+.navbar {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: background-color 0.5s;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+    transition: color 0.5s;
+}
+
+
+/* Add styles for the content within each section as needed. */
+
+/* Change navbar background color and link color when scrolling to the blue section */
+.navbar.scrolled {
+    background-color: black;
+}
+
+.navbar.scrolled a {
+    color: white;
+}
+
+
+.navbar.scrolled {
+    background-color: black;
+    transition: background-color 0.3s;
+}
+
+/* Styles for navbar text in blue sections */
+.navbar.blue-section {
+    background-color:rgb(191,214,255);
+    color: white; /* Text color for blue sections */
+    transition: background-color 0.3s;
+}
+/* Now, when you scroll down to the blue sections, the navbar's background color will change from white to black, and the text color will also adjust accordingly. */
+
+/* base.css */
+/* Your initial navbar styles here */
+
+/* Styles for the scrolled navbar */
+.navbar.scrolled {
+    background-color: black;
+    transition: background-color 0.3s;
+}
+
+/* Styles for navbar text in blue sections */
+.navbar.blue-section {
+    background-color: rgb(191,214,255);
+    color: white; /* Text color for blue sections */
+    transition: background-color 0.3s;
+}
+
+/* Styles for the buttons when navbar is scrolled */
+.navbar-buttons.scrolled-buttons .btn {
+    color: white;
+    border-color: white;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+/* Styles for the buttons in blue sections */
+.navbar-buttons.blue-buttons .btn {
+    color: white;
+    border-color: white;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+
+/* Styles for the scrolled navbar */
+.navbar.scrolled {
+    background-color: black;
+    transition: background-color 0.3s;
+}
+
+/* Styles for navbar text in blue sections */
+.navbar.blue-section {
+    background-color: rgb(191,214,255);
+    color: white; /* Text color for blue sections */
+    transition: background-color 0.3s;
+}
+
+/* Styles for the buttons when navbar is scrolled */
+.navbar-buttons.scrolled-buttons .btn {
+    color: white;
+    border-color: white;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+/* Styles for the buttons in blue sections */
+.navbar-buttons.blue-buttons .btn {
+    color: white;
+    border-color: white;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+/* Styles for the username and icon when navbar is scrolled */
+.navbar-buttons.scrolled-buttons .m-3 {
+    color: white; /* Change the color of the username */
+    transition: color 0.3s;
+}
+
+.navbar-buttons.scrolled-buttons .fa-user {
+    color: white; /* Change the color of the user icon */
+    transition: color 0.3s;
+}
+
+

@@ -1,0 +1,43 @@
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-text{
+    margin-bottom: 15px;
+}
+
+h1{
+    font-size: 3rem;
+}
+
+.adding{
+    margin-top: 30px;
+}
+
+.box{
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    border-top: 4px solid #000; /* Adjust the color as needed */
+    text-align: center;
+  }
+    
+
+.box:hover {
+    border-top-color: #2ec1ac !important;
+}
+
+.info{
+    border: 40px;
+}
+.swiper {
+    /* width: 600px; */
+    height: 300px;
+  }
+
+  .underlined-text {
+    text-decoration: underline;
+  }
