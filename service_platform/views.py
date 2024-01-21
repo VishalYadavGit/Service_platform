@@ -129,7 +129,7 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form,'message':messages})
 
 
 def logout(request):
