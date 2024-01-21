@@ -26,6 +26,8 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    photo = models.ImageField(upload_to='service_photos/')
+
 
 class Booking(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)
