@@ -33,7 +33,7 @@ def service(request):
     search_query = request.GET.get('q', '')
     action = request.GET.get('action')
 
-    services = Service.objects.all()
+    services = Service.objects.filter(types='service')
 
     if category_filter:
         services = services.filter(category=category_filter)
@@ -175,10 +175,12 @@ def detectit(request):
         instance.save()
         identified_shapes=opencv.shapes(instance.picture.path)
         print(identified_shapes)
-        if 'Rectangle' in identified_shapes:
-            context={'job':'Electrician'}
+        if identified_shapes==1:
+            products=Service.objects.filter(category='electrician',types='product')
+            context={'job':'An electrician','products':products}
         else:
-            context={'job':'Plumber'}
+            products=Service.objects.filter(category='plumber',types='product')
+            context={'job':'A plumber','products':products}
         return render(request,'confirmation.html',context)
     else:
         return redirect('book')

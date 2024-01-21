@@ -48,6 +48,12 @@ def shapes(photo):
                        cv.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 1)
 
     print("Identified Shapes:", identified_shapes)
+    rec=identified_shapes.count("Rectangle")
+    cir=identified_shapes.count("Circle")
+    if cir>rec:
+        return 0
+    else:
+        return 1
     return identified_shapes
     cv.imshow("Shapes", img)
     cv.waitKey()

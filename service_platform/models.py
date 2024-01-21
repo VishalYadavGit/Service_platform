@@ -8,9 +8,14 @@ class Service(models.Model):
         ('plumber', 'Plumber'),
         # Add more categories as needed
     ]
-
+    types_choices = [
+        ('service', 'Service'),
+        ('product', 'Product'),
+        # Add more categories as needed
+    ]
     name = models.CharField(max_length=255)
     category = models.CharField(max_length=20, choices=CATEGORY_CHOICES, default='electrician')
+    types = models.CharField(max_length=20, choices=types_choices, default='service')
     rating = models.FloatField()
     total_reviews = models.IntegerField()
     cost = models.DecimalField(max_digits=8, decimal_places=2)

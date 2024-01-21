@@ -1,4 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>You might need a {{job}}</h1>
+<div style="min-height:100vh;">
+    <h1 class="text-center mt-4">Done! {{job}} will be sent right away! <i style="color:green" class="fa fa-check"></i><br>
+    <a class="h6" href="">Something wrong?</a></h1>
+    <h2 class="text-center mt-4">Recommended addons for you!!</h2>
+    <div style="padding:0px 10%;display: grid;grid-template-columns: repeat(3, 1fr);
+    gap: 20px;" class="recommendation">
+
+    {% for product in products %}
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ product.photo.url }}" alt="{{ product.title }}">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.desciption}}</p>
+            <p class="card-text">{{product.cost}}</p>
+            <a href="#" class="btn btn-success">Add to cart</a>
+        </div>
+    </div>
+    {% endfor %}
+    
+        
+
+    </div>
+</div>
 {% endblock content %}
