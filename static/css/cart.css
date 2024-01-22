@@ -1,0 +1,11 @@
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-display {
+    margin: 0 10px;
+}
+body {
+    overflow-x: hidden;
+}

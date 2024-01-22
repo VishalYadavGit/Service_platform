@@ -17,6 +17,9 @@ def about(request):
 
 def contact(request):
     return render(request,'contact.html')
+def fixsolution(request):
+    return render(request,'fixsolution.html')
+
 
 # views.py
 from django.db.models import Q
@@ -32,7 +35,7 @@ def service(request):
     category_filter = request.GET.get('category', '')
     search_query = request.GET.get('q', '')
     action = request.GET.get('action')
-
+    types1="Services"
     services = Service.objects.filter(types='service')
 
     if category_filter:
@@ -50,7 +53,7 @@ def service(request):
         # Split descriptions into a list
         service.description_list = service.description.split("\n")
 
-    return render(request, 'service.html', {'services': services, 'category_filter': category_filter, 'search_query': search_query})
+    return render(request, 'service.html', {'services': services, 'category_filter': category_filter, 'search_query': search_query,'types': types1})
 
 
 def add_to_cart(request, service_id):
@@ -68,6 +71,45 @@ def add_to_cart(request, service_id):
     return redirect('service')
 
 # views.py
+
+def product(request):
+    category_filter = request.GET.get('category', '')
+    search_query = request.GET.get('q', '')
+    action = request.GET.get('action')
+    types1="Products"
+    services = Service.objects.filter(types='product')
+
+    if category_filter:
+        services = services.filter(category=category_filter)
+    
+    if action == 'search' and search_query:
+        services = services.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query))
+
+    # Check if the reset button is clicked, and reset both category_filter and search_query
+    if action == 'reset':
+        category_filter = ''
+        search_query = ''
+
+    for service in services:
+        # Split descriptions into a list
+        service.description_list = service.description.split("\n")
+
+    return render(request, 'service.html', {'services': services, 'category_filter': category_filter, 'search_query': search_query,'types': types1})
+
+
+def add_to_cart(request, service_id):
+    service = get_object_or_404(Service, pk=service_id)
+    user = request.user
+
+    # Check if the item is already in the cart for this user
+    cart_item, created = Cart.objects.get_or_create(user=user, service=service)
+
+    if not created:
+        # If the item is already in the cart, increase the quantity
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('service')
 
 def view_cart(request):
     # Replace this with your actual logic to get cart items for the current user
