@@ -11,7 +11,7 @@
 
 {% endblock %}
 {% block content %}
-<h1>Services Provided</h1>
+<h1>{{types}} Provided</h1>
 
 <form method="get" action="{% url 'service' %}" id="filterForm">
     <label for="category">Filter by Category:</label>
@@ -64,7 +64,8 @@
                     </div>
                     <!-- Quantity controls on the right side -->
                     <div class="quantity-controls" id="quantityControls{{ service.id }}">
-                        <button class="btn btn-primary" onclick="increaseQuantity('{{ service.id }}')">Add</button>
+                        <a href="{% url 'add_to_cart' service.id %}" class="btn btn-primary ordernow">Add to cart</a>
+                        <h3>{{service.id}}<h3>
                     </div>
                 </div>
             </div>
