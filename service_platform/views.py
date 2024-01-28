@@ -8,6 +8,7 @@ from .forms import  SignupForm, LoginForm
 # views.py
 from . import opencv
 from .models import Service
+from .models import Product
 
 def index(request):
     return render(request,'index.html')
@@ -77,24 +78,24 @@ def product(request):
     search_query = request.GET.get('q', '')
     action = request.GET.get('action')
     types1="Products"
-    services = Service.objects.filter(types='product')
+    products = Product.objects.filter(types='product')
 
     if category_filter:
-        services = services.filter(category=category_filter)
+        products = products.filter(category=category_filter)
     
     if action == 'search' and search_query:
-        services = services.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query))
+        products = products.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query))
 
     # Check if the reset button is clicked, and reset both category_filter and search_query
     if action == 'reset':
         category_filter = ''
         search_query = ''
 
-    for service in services:
+    for product in products:
         # Split descriptions into a list
-        service.description_list = service.description.split("\n")
+        product.description_list = product.description.split("\n")
 
-    return render(request, 'service.html', {'services': services, 'category_filter': category_filter, 'search_query': search_query,'types': types1})
+    return render(request, 'product.html', {'products': products, 'category_filter': category_filter, 'search_query': search_query,'types': types1})
 
 
 def add_to_cart(request, service_id):
