@@ -35,7 +35,7 @@
           </div>
           <div class="col-md-6 p-0 mb-3">
             <label class="form-label">Picture</label>
-            <input type="file" accept="image/*" Name='picture' class="form-control shadow-none">
+            <input type="file" id="imageinp" accept="image/*" Name='picture' class="form-control shadow-none">
           </div>
           <div class="col-md-12 p-0 mb-3">
             <label class="form-label">Address</label>
@@ -45,6 +45,10 @@
             <label class="form-label">PinCode</label>
             <input type="number" Name='pincode' class="form-control shadow-none">
           </div>
+          <div>
+            <img id="previewImage" style="width:100px" src="" alt="">
+            <h3 id="uploadMessage"></h3>
+          </div>
         </div>
       </div>
       <div class="text-center my-1">
@@ -52,4 +56,73 @@
       </div>
     </div>
   </form>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+     
+      var csrftoken = getCookie('csrftoken');
+      $('#imageinp').on('change', function() {
+        var file = this.files[0];
+    
+        if (file && file.type.startsWith('image/')) {
+          displayImage(file);
+    
+
+          sendFileToBackend(file, csrftoken);
+        } else {
+          alert('Please select a valid image file.');
+        }
+      });
+    
+      function displayImage(file) {
+        var reader = new FileReader();
+    
+        reader.onload = function(e) {
+          $('#previewImage').attr('src', e.target.result);
+        };
+    
+        reader.readAsDataURL(file);
+      }
+    
+      function sendFileToBackend(file, csrftoken) {
+        var formData = new FormData();
+        formData.append('file', file);
+    
+        $.ajax({
+          type: 'POST',
+          url: '/ai/',
+          data: formData,
+          contentType: false,
+          processData: false,
+          headers: {
+            'X-CSRFToken': csrftoken
+          },
+          success: function(response) {
+            console.log('File successfully sent to the backend:', response);
+            $('#uploadMessage').text(response.message);
+          },
+          error: function(xhr, status, error) {
+            console.error('Error sending file to the backend:', error);
+            console.log('XHR:', xhr);
+            console.log('Status:', status);
+          }
+        });
+      }
+    
+      function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = $.trim(cookies[i]);
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+    });
+  </script>
 {% endblock %}

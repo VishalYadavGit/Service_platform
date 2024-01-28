@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User,auth
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import logout
 from .models import Service, Cart, Booking
 # Create your views here.
@@ -8,7 +11,6 @@ from .forms import  SignupForm, LoginForm
 # views.py
 from . import opencv
 from .models import Service
-from .models import Product
 
 def index(request):
     return render(request,'index.html')
@@ -119,11 +121,9 @@ def view_cart(request):
 
     return render(request, 'cart.html', {'cart_items': cart_items})
 
+@login_required(login_url='login')
 def book(request):
-    if request.user.is_authenticated:
         return render(request,'book.html')
-    else:
-        return redirect('login')
 
 
 def register(request):
@@ -227,3 +227,12 @@ def detectit(request):
         return render(request,'confirmation.html',context)
     else:
         return redirect('book')
+
+def ai(request):
+    if request.method == 'POST' and 'file' in request.FILES:
+        uploaded_file = request.FILES['file']
+        caption, time = generate_caption(uploaded_file)
+
+        return JsonResponse({'status': 'success', 'message': caption})
+    else:
+        return JsonResponse({'status': 'error', 'message': 'No file found in the request'})
