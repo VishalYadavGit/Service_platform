@@ -11,6 +11,7 @@ from .forms import  SignupForm, LoginForm
 # views.py
 from . import opencv
 from .models import Service
+from .ai import generate_caption
 
 def index(request):
     return render(request,'index.html')
@@ -34,12 +35,38 @@ from .models import Service, Cart
 # views.py
 from django.db.models import Q
 
+def product(request):
+    category_filter = request.GET.get('category', '')
+    search_query = request.GET.get('q', '')
+    action = request.GET.get('action')
+
+    products = Service.objects.filter(types='product')
+    print(products)
+    if category_filter:
+        products = products.filter(category=category_filter)
+    
+    if action == 'search' and search_query:
+        products = products.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query))
+
+    # Check if the reset button is clicked, and reset both category_filter and search_query
+    if action == 'reset':
+        category_filter = ''
+        search_query = ''
+
+    for product in products:
+        # Split descriptions into a list
+        product.description_list = product.description.split("\n")
+
+
+
+    return render(request, 'product.html', {'products': products, 'category_filter': category_filter, 'search_query': search_query})
 def service(request):
     category_filter = request.GET.get('category', '')
     search_query = request.GET.get('q', '')
     action = request.GET.get('action')
-    types1="Services"
+
     services = Service.objects.filter(types='service')
+    
 
     if category_filter:
         services = services.filter(category=category_filter)
@@ -56,7 +83,9 @@ def service(request):
         # Split descriptions into a list
         service.description_list = service.description.split("\n")
 
-    return render(request, 'service.html', {'services': services, 'category_filter': category_filter, 'search_query': search_query,'types': types1})
+    return render(request, 'service.html', {'services': services, 'category_filter': category_filter, 'search_query': search_query})
+
+
 
 
 def add_to_cart(request, service_id):
@@ -71,55 +100,32 @@ def add_to_cart(request, service_id):
         cart_item.quantity += 1
         cart_item.save()
 
-    return redirect('service')
+    referring_url = request.META.get('HTTP_REFERER', '/fallback-url/')
 
-# views.py
+    return redirect(referring_url)
 
-def product(request):
-    category_filter = request.GET.get('category', '')
-    search_query = request.GET.get('q', '')
-    action = request.GET.get('action')
-    types1="Products"
-    products = Product.objects.filter(types='product')
-
-    if category_filter:
-        products = products.filter(category=category_filter)
-    
-    if action == 'search' and search_query:
-        products = products.filter(Q(name__icontains=search_query) | Q(description__icontains=search_query))
-
-    # Check if the reset button is clicked, and reset both category_filter and search_query
-    if action == 'reset':
-        category_filter = ''
-        search_query = ''
-
-    for product in products:
-        # Split descriptions into a list
-        product.description_list = product.description.split("\n")
-
-    return render(request, 'product.html', {'products': products, 'category_filter': category_filter, 'search_query': search_query,'types': types1})
-
-
-def add_to_cart(request, service_id):
+def remove_item(request, service_id):
     service = get_object_or_404(Service, pk=service_id)
     user = request.user
 
     # Check if the item is already in the cart for this user
-    cart_item, created = Cart.objects.get_or_create(user=user, service=service)
+    cart_item = Cart.objects.get(user=user, service=service)
 
-    if not created:
-        # If the item is already in the cart, increase the quantity
-        cart_item.quantity += 1
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
         cart_item.save()
+    else:
+        cart_item.delete()
 
-    return redirect('service')
+    return redirect('view_cart')
 
 def view_cart(request):
     # Replace this with your actual logic to get cart items for the current user
     user = request.user
     cart_items = Cart.objects.filter(user=user)
+    cart_total = sum(item.get_item_total() for item in cart_items)
 
-    return render(request, 'cart.html', {'cart_items': cart_items})
+    return render(request, 'cart.html', {'cart_items': cart_items,'cart_total': cart_total})
 
 @login_required(login_url='login')
 def book(request):

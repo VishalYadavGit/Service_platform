@@ -1,7 +1,7 @@
 from django.urls import path
 from . import views
 from django.conf.urls.static import static
-from .views import service, add_to_cart, view_cart
+from .views import service, add_to_cart, view_cart,remove_item
 
 
 
@@ -19,6 +19,7 @@ urlpatterns = [
     path('logout/',views.logout,name='logout'),
     # path("logout",views.logout_view,name = "logout")
     path('add_to_cart/<int:service_id>/', add_to_cart, name='add_to_cart'),
+    path('remove_item/<int:service_id>/', remove_item, name='remove_item'),
     path('view_cart/', view_cart, name='view_cart'),
     path('detectit/',views.detectit,name = 'detectit'),
     path('ai/',views.ai,name = 'ai'),
