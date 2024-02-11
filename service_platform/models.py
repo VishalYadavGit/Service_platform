@@ -22,6 +22,8 @@ class Service(models.Model):
     photo = models.ImageField(upload_to='service_photos/')
     def __str__(self):
         return self.name
+    
+    
 class Product(models.Model):
     CATEGORY_CHOICES = [
         ('electrician', 'Electrician'),

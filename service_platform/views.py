@@ -1,15 +1,17 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User,auth
+
 from django.contrib import messages
 from django.http import JsonResponse
+from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import logout
-from .models import Service, Cart, Booking
+from .models import *
 # Create your views here.
 from .forms import  SignupForm, LoginForm
+from .ai import generate_caption
 # views.py
-from . import opencv
+
 from .models import Service
 
 def index(request):
@@ -216,23 +218,15 @@ def detectit(request):
         print(user_id,name,email,phone,picture,address,pincode)
         instance=Booking.objects.create(user_id=user_id,name=name,email=email,phone=phone,picture=picture,address=address,pincode=pincode)
         instance.save()
-        identified_shapes=opencv.shapes(instance.picture.path)
-        print(identified_shapes)
-        if identified_shapes==1:
-            products=Service.objects.filter(category='electrician',types='product')
-            context={'job':'An electrician','products':products}
-        else:
-            products=Service.objects.filter(category='plumber',types='product')
-            context={'job':'A plumber','products':products}
-        return render(request,'confirmation.html',context)
-    else:
-        return redirect('book')
+       
 
 def ai(request):
     if request.method == 'POST' and 'file' in request.FILES:
         uploaded_file = request.FILES['file']
         caption, time = generate_caption(uploaded_file)
-
+        
         return JsonResponse({'status': 'success', 'message': caption})
     else:
         return JsonResponse({'status': 'error', 'message': 'No file found in the request'})
+    
+    
