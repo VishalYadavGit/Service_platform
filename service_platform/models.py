@@ -28,6 +28,7 @@ class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    ispaid = models.BooleanField(default=False)
 
     def get_item_total(self):
         return self.service.cost * self.quantity

@@ -93,7 +93,7 @@ def add_to_cart(request, service_id):
     user = request.user
 
     # Check if the item is already in the cart for this user
-    cart_item, created = Cart.objects.get_or_create(user=user, service=service)
+    cart_item, created = Cart.objects.get_or_create(user=user, service=service,ispaid=False)
 
     if not created:
         # If the item is already in the cart, increase the quantity
@@ -109,7 +109,7 @@ def remove_item(request, service_id):
     user = request.user
 
     # Check if the item is already in the cart for this user
-    cart_item = Cart.objects.get(user=user, service=service)
+    cart_item = Cart.objects.get(user=user, service=service, ispaid=False)
 
     if cart_item.quantity > 1:
         cart_item.quantity -= 1
@@ -122,14 +122,16 @@ def remove_item(request, service_id):
 def view_cart(request):
     # Replace this with your actual logic to get cart items for the current user
     user = request.user
-    cart_items = Cart.objects.filter(user=user)
+    cart_items = Cart.objects.filter(user=user,ispaid=False)
     cart_total = sum(item.get_item_total() for item in cart_items)
 
     return render(request, 'cart.html', {'cart_items': cart_items,'cart_total': cart_total})
 
 @login_required(login_url='login')
 def book(request):
-        return render(request,'book.html')
+        form_type="User Registration"
+        form_title="Book Now"
+        return render(request,'book.html',{'form_type':form_type,'form_title':form_title})
 
 
 def register(request):
@@ -242,3 +244,23 @@ def ai(request):
         return JsonResponse({'status': 'success', 'message': caption})
     else:
         return JsonResponse({'status': 'error', 'message': 'No file found in the request'})
+    
+def checkout(request):
+    if request.method=='POST':
+        user_id = request.user.id
+        name=request.POST['name']
+        email=request.POST['email']
+        phone=request.POST['phone']
+        address=request.POST['address']
+        pincode=request.POST['pincode']
+        instance=Booking.objects.create(user_id=user_id,name=name,email=email,phone=phone,address=address,pincode=pincode)
+        instance.save()
+        products=Service.objects.all()
+        Cart.objects.filter(user=request.user).update(ispaid=True)
+        return render(request,'confirmation.html',{'products':products})
+    form_type="Fill Your Address Details"
+    form_title="Address"
+    user = request.user
+    cart_items = Cart.objects.filter(user=user,ispaid=False)
+    cart_total = sum(item.get_item_total() for item in cart_items)
+    return render(request,'book.html',{'form_type':form_type,'form_title':form_title,'cart_total':cart_total})

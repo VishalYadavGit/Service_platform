@@ -6,12 +6,21 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock %}
 {% block content %}
-<h1>Book Now</h1>
+<h1>{{ form_title }}</h1>
+{% if form_title != "Book Now" %}
+<h2 class="bg-success">Your cart total is {{ cart_total }}</h2>
+{% endif %}
+{% if form_title == "Book Now" %} 
 <form action="/detectit" method='post' enctype="multipart/form-data">
+{% endif %}
+{% if form_title != "Book Now" %} 
+<form action="/checkout/" method='post' enctype="multipart/form-data">
+{% endif %}
+
   {% csrf_token %}
     <div class="modal-header">
       <h5 class="modal-title d-flex align-items-center">
-        <i class="bi bi-person-lines-fill fs-3 me-2"></i>User Registration
+        <i class="bi bi-person-lines-fill fs-3 me-2"></i>{{ form_type }}
       </h5>
     </div>
     <div class="modal-body">
@@ -33,10 +42,20 @@
             <label class="form-label">Phone no.</label>
             <input type="number" Name='phone' class="form-control shadow-none">
           </div>
+          {% if form_title == "Book Now" %}
           <div class="col-md-6 p-0 mb-3">
             <label class="form-label">Picture</label>
             <input type="file" id="imageinp" accept="image/*" Name='picture' class="form-control shadow-none">
           </div>
+          {% endif %}
+          {% if form_title != "Book Now" %}
+          <div class="col-md-6 p-0 mb-3">
+            <label class="form-label">Payment method</label>
+            <select class="form-control shadow-none" name="" id="">
+              <option>Cash on delivery</option>
+            </select>
+          </div>
+          {% endif %}
           <div class="col-md-12 p-0 mb-3">
             <label class="form-label">Address</label>
             <textarea class="form-control shadow-none"  Name='address' rows="1"></textarea>
@@ -45,6 +64,16 @@
             <label class="form-label">PinCode</label>
             <input type="number" Name='pincode' class="form-control shadow-none">
           </div>
+          {% if form_title == "Book Now" %}
+          <div class="col-md-6 p-0 mb-3">
+            <label class="form-label">I need (Upload an Image to let AI decide.)</label>
+            <select class="form-control shadow-none" name="" id="">
+              <option></option>
+              <option>A Plumber</option>
+              <option>An Electrician</option>
+            </select>
+          </div>
+          {% endif %}
           <div>
             <img id="previewImage" style="width:100px" src="" alt="">
             <img id="loading" style="display:none;" src="{% static 'animations/loading.gif' %}" alt="">
@@ -53,7 +82,7 @@
         </div>
       </div>
       <div class="text-center my-1">
-        <button type="submit" class="btn btn-dark shadow-none">Book</button>
+        <button type="submit" class="btn btn-dark shadow-none">{{ form_type }}</button>
       </div>
     </div>
   </form>
