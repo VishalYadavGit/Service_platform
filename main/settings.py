@@ -104,14 +104,24 @@ WSGI_APPLICATION = 'main.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT':'5432'
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT':'5432'
+        'NAME': 'vbfhjcqk',
+        'USER': 'vbfhjcqk',
+        'PASSWORD': '7Fo36_Vfqzc40AS07Ip5gI1v4DlJLHXw',
+        'HOST': 'silly.db.elephantsql.com',
+        'PORT':''
     }
 }
 
