@@ -47,6 +47,7 @@
           </div>
           <div>
             <img id="previewImage" style="width:100px" src="" alt="">
+            <img id="loading" style="display:none;" src="{% static 'animations/loading.gif' %}" alt="">
             <h3 id="uploadMessage"></h3>
           </div>
         </div>
@@ -62,6 +63,7 @@
      
       var csrftoken = getCookie('csrftoken');
       $('#imageinp').on('change', function() {
+
         var file = this.files[0];
     
         if (file && file.type.startsWith('image/')) {
@@ -82,6 +84,8 @@
         };
     
         reader.readAsDataURL(file);
+        $('#loading').show();
+
       }
     
       function sendFileToBackend(file, csrftoken) {
@@ -99,12 +103,15 @@
           },
           success: function(response) {
             console.log('File successfully sent to the backend:', response);
+            $('#loading').hide();
             $('#uploadMessage').text(response.message);
           },
           error: function(xhr, status, error) {
             console.error('Error sending file to the backend:', error);
             console.log('XHR:', xhr);
             console.log('Status:', status);
+            $('#loading').hide();
+            $('#uploadMessage').text("An error has occured. Please try again.");
           }
         });
       }

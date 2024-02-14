@@ -1,10 +1,42 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <h1>Your Cart</h1>
+<style>
+    .navy{
+        padding:10px;
+    }
+</style>
+    <h2>Your Cart</h2>
     <div>
-        {% for item in cart_items %}
-            {{ item.service.name }} - Quantity: {{ item.quantity }}<br>
-            <!-- Add other item details as needed -->
-        {% endfor %}
+        <table class="w-100 text-center">
+            <thead>
+                <tr>
+                    <td>Item</td>
+                    <td>Quantity</td>
+                    <td>Price</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr style="border:1px solid black">
+                    <td><img width="100" src="{{ item.service.photo.url }}" alt=""><br><h4>{{ item.service.name }}</h4></td>
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.service.cost }}</td>
+                    <td style="max-width: 100px;"><a class="btn btn-danger" href="{% url 'remove_item' item.service.id %}">Remove</a>
+                    <a class="btn btn-success" href="{% url 'add_to_cart' item.service.id %}">Increase quantity</a></td>
+
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Total: {{ cart_total }}</td>
+                    <td><a class="btn btn-success" href="">Checkout</a></td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 {% endblock %}

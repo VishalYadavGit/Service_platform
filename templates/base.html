@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg ">
+    <nav class="navbar sticky-top navbar-expand-lg navy">
         <a class="navbar-brand" href="{% url 'index' %}">Plumbtric</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -73,8 +73,11 @@
         </div>
 
     </nav>
-    {% block content %}
-    {% endblock %}
+    <div style="width:100%;padding:0px 20px;min-height:95vh">
+
+        {% block content %}
+        {% endblock %}
+    </div>
 
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

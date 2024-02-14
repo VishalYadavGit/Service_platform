@@ -10,6 +10,7 @@ class Service(models.Model):
     ]
     types_choices = [
         ('service', 'Service'),
+        ('product', 'Product'),
         # Add more categories as needed
     ]
     name = models.CharField(max_length=255)
@@ -22,6 +23,7 @@ class Service(models.Model):
     photo = models.ImageField(upload_to='service_photos/')
     def __str__(self):
         return self.name
+<<<<<<< HEAD
     
     
 class Product(models.Model):
@@ -44,10 +46,16 @@ class Product(models.Model):
     photo = models.ImageField(upload_to='product_photos/')    
     def __str__(self):
         return self.name
+=======
+
+>>>>>>> 6579b92f8aa95d65de1d464f4586ffdd18a10ac7
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+
+    def get_item_total(self):
+        return self.service.cost * self.quantity
 
 class Booking(models.Model):
     user=models.ForeignKey(User,on_delete=models.CASCADE)

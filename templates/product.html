@@ -8,7 +8,11 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- Include Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-
+<style>
+    .bgcus{
+        background-color: #6f7cd36c;
+    }
+</style>
 {% endblock %}
 {% block content %}
 <h1>{{types}} Provided</h1>
@@ -23,11 +27,11 @@
     </select>
 
     <label for="search">Search:</label>
-    <input type="text" name="q" id="search" placeholder="Search products" value="{{ search_query }}">
+    <input type="text"  name="q" id="search" placeholder="Search products" value="{{ search_query }}">
     
-    <button type="submit" name="action" value="search">Search</button>
+    <button type="submit" class="btn btn-primary"s name="action" value="search"><i class="fa fa-search"></i> Search</button>
     
-    <button type="button" onclick="resetFilters()">Reset</button>
+    <button type="button" class="btn btn-primary" onclick="resetFilters()">Reset</button>
 
     <!-- Hidden reset button for JavaScript triggering -->
     <button type="submit" name="action" value="reset" id="resetButton" style="display: none;"></button>
@@ -36,10 +40,10 @@
 
 <div class="row m-2">
     {% for product in products %}
-        <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card mb-3">
+        <div class="col-lg-3 col-md-6 col-sm-12 my-2 py-3">
+            <div class="card mb-3  bgcus">
                 <div class="card-header">
-                    <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center ">
                         <!-- product name and rating -->
                         <div>
                             <h3>{{ product.name }}</h3>
@@ -56,17 +60,16 @@
                 <div class="card-body d-flex justify-content-between">
                     <div>
                         <p>Cost: {{ product.cost }}</p>
-                        <ul>
+                        <ul class="list-unstyled">
                             {% for description in product.description_list %}
                                 <li>{{ description }}</li>
                             {% endfor %}
                         </ul>
+                        <div class="quantity-controls" class="text-center" id="quantityControls{{ product.id }}">
+                            <a href="{% url 'add_to_cart' product.id %}" class="mx-auto btn btn-primary ordernow">Add to cart</a>
+                        </div>
                     </div>
                     <!-- Quantity controls on the right side -->
-                    <div class="quantity-controls" id="quantityControls{{ product.id }}">
-                        <a href="{% url 'add_to_cart' product.id %}" class="btn btn-primary ordernow">Add to cart</a>
-                        <h3>{{product.id}}<h3>
-                    </div>
                 </div>
             </div>
         </div>
