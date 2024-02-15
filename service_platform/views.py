@@ -237,9 +237,6 @@ def ai(request):
     else:
         return JsonResponse({'status': 'error', 'message': 'No file found in the request'})
     
-<<<<<<< HEAD
-    
-=======
 def checkout(request):
     if request.method=='POST':
         user_id = request.user.id
@@ -259,4 +256,3 @@ def checkout(request):
     cart_items = Cart.objects.filter(user=user,ispaid=False)
     cart_total = sum(item.get_item_total() for item in cart_items)
     return render(request,'book.html',{'form_type':form_type,'form_title':form_title,'cart_total':cart_total})
->>>>>>> 39faffeca8026545dc232b0a0906f9ce2353b904

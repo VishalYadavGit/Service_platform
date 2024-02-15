@@ -117,19 +117,11 @@ WSGI_APPLICATION = 'main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-<<<<<<< HEAD
-        'NAME': 'service_platform',
-        'USER': 'postgres',
-        'PASSWORD': 'Satvik@123',
-        'HOST': 'localhost',
-        'PORT':'5432'
-=======
         'NAME': 'vbfhjcqk',
         'USER': 'vbfhjcqk',
         'PASSWORD': '7Fo36_Vfqzc40AS07Ip5gI1v4DlJLHXw',
         'HOST': 'silly.db.elephantsql.com',
         'PORT':''
->>>>>>> 39faffeca8026545dc232b0a0906f9ce2353b904
     }
 }
 
