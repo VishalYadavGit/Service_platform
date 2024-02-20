@@ -11,7 +11,7 @@
 <h2 class="bg-success">Your cart total is {{ cart_total }}</h2>
 {% endif %}
 {% if form_title == "Book Now" %} 
-<form action="/detectit" method='post' enctype="multipart/form-data">
+<form action="/detectit/" method='post' enctype="multipart/form-data">
 {% endif %}
 {% if form_title != "Book Now" %} 
 <form action="/checkout/" method='post' enctype="multipart/form-data">
@@ -73,17 +73,17 @@
           {% if form_title == "Book Now" %}
           <div class="col-md-6 p-0 mb-3">
             <label class="form-label">I need (Upload an Image to let AI decide.)</label>
-            <select class="form-control shadow-none" name="" id="">
-              <option></option>
-              <option>A Plumber</option>
-              <option>An Electrician</option>
+            <select class="form-control shadow-none" name="optionSelector" id="optionSelector">
+              <option value=""></option>
+              <option value="Plumber">A Plumber</option>
+              <option value="Electrician">An Electrician</option>
             </select>
           </div>
           {% endif %}
           <div>
             <img id="previewImage" style="width:100px" src="" alt="">
             <img id="loading" style="display:none;" src="{% static 'animations/loading.gif' %}" alt="">
-            <h3 id="uploadMessage"></h3>
+            <span id="uploadMessage"></span>
           </div>
         </div>
       </div>
@@ -140,6 +140,7 @@
             console.log('File successfully sent to the backend:', response);
             $('#loading').hide();
             $('#uploadMessage').text(response.message);
+            $('#optionSelector').val(response.conclusion);
           },
           error: function(xhr, status, error) {
             console.error('Error sending file to the backend:', error);

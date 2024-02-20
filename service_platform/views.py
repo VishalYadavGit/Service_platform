@@ -223,17 +223,54 @@ def detectit(request):
         picture=request.FILES['picture']
         address=request.POST['address']
         pincode=request.POST['pincode']
+        optionSelector=request.POST['optionSelector']
         print(user_id,name,email,phone,picture,address,pincode)
         instance=Booking.objects.create(user_id=user_id,name=name,email=email,phone=phone,picture=picture,address=address,pincode=pincode)
         instance.save()
+        if optionSelector=="Plumber":
+            products=Service.objects.filter(category='plumber',types='product')
+        if optionSelector=="Electrician":
+            products=Service.objects.filter(category='electrician',types='product')
+        return render(request,'confirmation.html',{'products':products})
        
 
 def ai(request):
     if request.method == 'POST' and 'file' in request.FILES:
         uploaded_file = request.FILES['file']
         caption, time = generate_caption(uploaded_file)
-        
-        return JsonResponse({'status': 'success', 'message': caption})
+        electrician = [
+    'electrician', 'electrical', 'wiring', 'circuit', 'outlet', 'switch', 'lighting', 'resistor', 
+    'conduit', 'breaker', 'wire', 'volt', 'amp', 'socket', 'junction box', 'grounding', 'generator', 
+    'transformer', 'cable', 'fuse', 'meter', 'insulation', 'power', 'voltage', 'current', 'ohm', 
+    'electric panel', 'receptacle', 'electrical code', 'circuit breaker', 'electrical contractor', 
+    'electrical work', 'watt', 'kilowatt', 'electrical system', 'short circuit', 'ohmmeter', 'multimeter', 
+    'electrical repair', 'electrical service'
+]
+        plumber = [
+    'plumber', 'plumbing', 'pipe', 'leak', 'faucet', 'valve', 'wrench', 'sewer', 'drain', 
+    'clog', 'pipefitter', 'pipefitting', 'water', 'fixture', 'soldering', 'sealant', 
+    'plunger', 'toilet', 'flush', 'copper', 'pex', 'galvanized', 'pipe wrench', 'pipe cutter', 
+    'snake', 'auger', 'plumbing code', 'water heater', 'plumbing fixture', 'gasket', 'joint', 
+    'plumbing system', 'vent', 'trap', 'pressure', 'backflow', 'plumbing repair', 'plumbing service','faucet'
+]
+        def is_related_to_plumber(input_string):
+         for word in plumber:
+          if word in input_string:
+           return True
+         return False
+        def is_related_to_electrician(input_string):
+         for word in electrician:
+          if word in input_string:
+           return True
+         return False
+        conclusion = ""
+        if is_related_to_electrician(caption):
+            conclusion = "Electrician"
+        else:
+            is_related_to_plumber(caption)
+            conclusion = "Plumber"
+            
+        return JsonResponse({'status': 'success', 'message': caption,'conclusion':conclusion,})
     else:
         return JsonResponse({'status': 'error', 'message': 'No file found in the request'})
     
