@@ -29,9 +29,11 @@
     <label for="search">Search:</label>
     <input type="text" name="q" id="search" placeholder="Search services" value="{{ search_query }}">
     
-    <button type="submit" class="btn btn-primary" name="action" value="search"><i class="fa fa-search"></i>Search</button>
+
+    <button type="submit" class="btn btn-primary" name="action" value="search">Search</button>
     
-    <button type="button"  class="btn btn-primary" onclick="resetFilters()">Reset</button>
+    <button type="button" class="btn btn-primary" onclick="resetFilters()">Reset</button>
+
 
     <!-- Hidden reset button for JavaScript triggering -->
     <button type="submit" name="action" value="reset" id="resetButton" style="display: none;"></button>
