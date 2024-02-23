@@ -1,15 +1,74 @@
 {% extends "base.html" %}
 {% block content %}
-<<<<<<< HEAD
+<style>
+    .navy {
+        padding: 10px;
+    }
+    body {
+        margin: 0 20px; /* Adjust the side margins as needed */
+    }
+    .video-container {
+        display: flex;
+        margin-bottom: 20px; /* Adjust this value for the distance between videos */
+    }
+    .video-container iframe {
+        width: 50%; /* Adjust width for each video */
+        height: 320px; /* Adjust height for each video */
+    }
+    .content {
+        width: 50%;
+        float: right; /* Float the content to the right */
+        padding: 0 20px; /* Add padding to separate content from the videos */
+        box-sizing: border-box;
+    }
+</style>
 
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/JJeBdzEmvoM?si=mUKY35UEUq6NycHD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="content">
+        <p><b><center><h2>Tap Fixing in case of emergency situation</b></p></center>
+            <p>"Got a leaky tap? Don't let it drip, let's fix it in a snap! Watch our quick tutorial on tap fixing in emergency situations and say goodbye to wasted water and soggy socks. With just a few simple steps, you'll have that pesky leak under control in no time. Ready to roll up your sleeves and tackle that tap? Let's dive in!"</p><b>
+            Credits:- @vijayxyz1<br>
+            Creator:- vijay xyz
+            </p>
+    </div>
+</div>
 
-=======
-<style>.navy{
-    padding:10px;
-}</style>
->>>>>>> 6579b92f8aa95d65de1d464f4586ffdd18a10ac7
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DD_mOlEsmaM?si=QfrgPa5eRjfXdSt1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DD_mOlEsmaM?si=QfrgPa5eRjfXdSt1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DD_mOlEsmaM?si=QfrgPa5eRjfXdSt1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<div class="video-container">
+    <div class="content">
+        <p><center><h2>Emergency Wall Plug/Socket Replacement: Quick Fix Tutorial</b></center></p><br>
+        <p>"Need to wire up a switch board pronto? No need to panic! Our emergency tutorial has got you covered. Learn how to make your own switch connections quickly and safely. With clear instructions and simple techniques, you'll have those switches up and running in a flash. Let's get started!"</p>
+        <b>Credits:- @BuildersFan <br>
+        Creator:-  BuildersSA </b>
+        </p>
+    </div>
+    <iframe src="https://www.youtube.com/embed/kUJk6na-CF0?si=iOjoxmSjXu0INdTu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/xi8DMaoPBAk?si=h8mtMTtnqgNqwhF5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="content">
+        <p><b><center><h2>Emergency PVC Pipe Repair: Fast Fix Tutorial</b></p></center>
+        <p>"Facing a burst PVC pipe? Don't let the waterworks overwhelm you! Our emergency repair tutorial has you covered. Learn quick and effective techniques to patch up that pipe and prevent further damage. With a few simple steps, you'll have your plumbing back in shape in no time. Let's dive in!"</p><b>
+        Credits:- @vijayxyz1<br>
+        Creator:- vijay xyz
+        </p> 
+   </div>
+    <!-- Credit for YouTube video -->
+    <!-- Creator: [Creator's Name] -->
+    <!-- Video Link: [Link to the original YouTube video] -->
+</div>
 
-{% endblock  %}
+<div class="video-container">
+    <div class="content">
+        <p><center><h2>"Emergency Wiring: DIY Switch Board Connection"</b></center></p><br>
+        <p>"Need a quick fix for your switch board? Learn how to wire it up in no time with our emergency guide. Whether it's a blackout or a sudden malfunction, this tutorial has you covered. Get ready to make your own switch connection and regain control of your power!"</p>
+        <b> Credits:- @BEEEWorks <br>
+            Creator:- BEEE Works  </b>
+        </p>
+    </div>    <iframe src="https://www.youtube.com/embed/VIUDDXGer84?si=HFZDTBbPvwL2pKgw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <!-- Credit for YouTube video -->
+    <!-- Creator: [Creator's Name] -->
+    <!-- Video Link: [Link to the original YouTube video] -->
+</div>
+
+{% endblock %}
