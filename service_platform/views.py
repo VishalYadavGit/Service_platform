@@ -138,11 +138,10 @@ def book(request):
 
 def register(request):
     if request.method == 'POST':
-        first_name = request.POST['first_name'] #first_name is the name of the input field in register.html
-        last_name = request.POST['last_name']
+        print('User created')
         username = request.POST['username']
-        password1 = request.POST['password1'] #password1 is the name of the input field in register.html
-        password2 = request.POST['password2']
+        password1 = request.POST['password'] #password1 is the name of the input field in register.html
+        password2 = request.POST['confirm_password']
         email = request.POST['email']
 
         if password1 == password2:
@@ -153,16 +152,15 @@ def register(request):
                 messages.info(request,'Email taken')
                 return redirect('register') #redirect to the register page if the email already exists
             else:
-                user = User.objects.create_user(username = username, password = password1, email = email, first_name = first_name, last_name = last_name) #create a user
-                user.save() #save the user
+                user = User.objects.create_user(username = username, password = password1, email = email) #create a user
+                user.save()
                 print('User created')
-                return redirect('login') #redirect to the login page after the user is created
+                return redirect('login')
         else:
             messages.info(request,'Password not matching')
-            return redirect('register') #redirect to the register page if the password doesn't match
-        return redirect('/')
+            return redirect('register')
     else:
-        return render(request,'register.html')
+        return render(request,'register.html',{'form':SignupForm()})
 
 def login(request):
     if request.method == 'POST':
@@ -182,37 +180,12 @@ def login(request):
     else:
         form = LoginForm()
 
-    return render(request, 'login.html', {'form': form,'message':messages})
+    return render(request, 'login.html', {'form': form})
 
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
-
-from .forms import SignupForm
-
-def register(request):
-    if request.method == 'POST':
-        form = SignupForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            confirm_password = form.cleaned_data['confirm_password']
-
-            if password == confirm_password:
-                if not User.objects.filter(username=username).exists():
-                    user = User.objects.create_user(username=username, email=email, password=password)
-                    auth.login(request, user)
-                    return redirect('/')
-                else:
-                    form.add_error('username', 'Username is already taken.')
-            else:
-                form.add_error('confirm_password', 'Passwords do not match.')
-    else:
-        form = SignupForm()
-
-    return render(request, 'register.html', {'form': form})
 
 def detectit(request):
     if request.method=='POST':
@@ -275,7 +248,11 @@ def ai(request):
         return JsonResponse({'status': 'error', 'message': 'No file found in the request'})
     
 def checkout(request):
+    user = request.user
+    cart_items = Cart.objects.filter(user=user,ispaid=False)
+    cart_total = sum(item.get_item_total() for item in cart_items)
     if request.method=='POST':
+       if cart_total>0:
         user_id = request.user.id
         name=request.POST['name']
         email=request.POST['email']
@@ -287,9 +264,9 @@ def checkout(request):
         products=Service.objects.all()
         Cart.objects.filter(user=request.user).update(ispaid=True)
         return render(request,'confirmation.html',{'products':products})
+       else:
+        messages.error(request, 'Cart is empty')
+        return redirect('view_cart')
     form_type="Fill Your Address Details"
     form_title="Address"
-    user = request.user
-    cart_items = Cart.objects.filter(user=user,ispaid=False)
-    cart_total = sum(item.get_item_total() for item in cart_items)
     return render(request,'book.html',{'form_type':form_type,'form_title':form_title,'cart_total':cart_total})

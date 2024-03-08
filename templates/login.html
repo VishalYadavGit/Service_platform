@@ -17,11 +17,9 @@
     <h2>Login</h2>
     <form method="post" class="c">
       {% csrf_token %}
-      {% if error_message %}
-            <div class="error-message">
-                {{ error_message }}
-            </div>
-        {% endif %}
+      {% for message in messages %}
+      <p style="background-color: rgb(255, 148, 148); font-size: 15px;padding: 10px;border-radius: 5px;">{{ message }}</p>
+      {% endfor %}
       <div style="margin-top: 20px;">
 
         {{ form.username.label_tag }}

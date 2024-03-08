@@ -8,6 +8,9 @@
 </style>
     <h2>Your Cart</h2>
     <div>
+        {% for message in messages %}
+      <p style="background-color: rgb(255, 148, 148); font-size: 15px;padding: 10px;border-radius: 5px;">{{ message }}</p>
+      {% endfor %}
         <table class="w-100 text-center">
             <thead>
                 <tr>

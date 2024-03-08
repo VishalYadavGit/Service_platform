@@ -13,7 +13,9 @@
         <h2>Signup</h2>
         <form method="post">
           {% csrf_token %}
-
+          {% for message in messages %}
+      <p style="background-color: rgb(255, 148, 148); font-size: 15px;padding: 10px;border-radius: 5px;">{{ message }}</p>
+      {% endfor %}
          <div class="mt-1">
             {{ form.username.label_tag }}
             <br>
