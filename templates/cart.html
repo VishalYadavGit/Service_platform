@@ -37,9 +37,19 @@
                     <td></td>
                     <td></td>
                     <td>Total: {{ cart_total }}</td>
-                    <td><a class="btn btn-success" href="/checkout">Checkout</a></td>
+                    <td><a class="btn btn-success" href="/checkout" id="btn-check">Checkout</a></td>
                 </tr>
             </tfoot>
         </table>
+        <h4 id="tag" style="display:None"> Please add something in cart for checkout</h4>
     </div>
+    <script>
+
+        var tag = document.getElementById('tag')
+        var button = document.getElementById('btn-check')
+        if({{ cart_total }} == 0){
+            button.style.display="None"  
+            tag.style.display="Block" 
+        }
+    </script>
 {% endblock %}

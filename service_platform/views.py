@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.models import User
+from django.contrib import messages
+from .forms import SignupForm
 
 from django.contrib import messages
 from django.http import JsonResponse
@@ -121,6 +124,7 @@ def remove_item(request, service_id):
 
     return redirect('view_cart')
 
+@login_required(login_url='login')
 def view_cart(request):
     # Replace this with your actual logic to get cart items for the current user
     user = request.user
@@ -138,29 +142,36 @@ def book(request):
 
 def register(request):
     if request.method == 'POST':
-        print('User created')
-        username = request.POST['username']
-        password1 = request.POST['password'] #password1 is the name of the input field in register.html
-        password2 = request.POST['confirm_password']
-        email = request.POST['email']
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password1 = form.cleaned_data['password']
+            password2 = form.cleaned_data['confirm_password']
 
-        if password1 == password2:
-            if User.objects.filter(username = username).exists(): #check if the username already exists
-                messages.info(request,'Username taken')
-                return redirect('register') #redirect to the register page if the username already exists
-            elif User.objects.filter(email = email).exists(): #check if the email already exists
-                messages.info(request,'Email taken')
-                return redirect('register') #redirect to the register page if the email already exists
+            if password1 == password2:
+                if User.objects.filter(username=username).exists():
+                    messages.info(request, 'Username taken')
+                    return redirect('register')
+                elif User.objects.filter(email=email).exists():
+                    messages.info(request, 'Email taken')
+                    return redirect('register')
+                else:
+                    user = User.objects.create_user(username=username, password=password1, email=email)
+                    user.save()
+                    messages.success(request, 'Registration successful. You can now log in.')
+                    return redirect('login')
             else:
-                user = User.objects.create_user(username = username, password = password1, email = email) #create a user
-                user.save()
-                print('User created')
-                return redirect('login')
+                messages.error(request, 'Passwords do not match')
+                return redirect('register')
         else:
-            messages.info(request,'Password not matching')
-            return redirect('register')
+            # Form is not valid, display the form with validation errors
+            return render(request, 'register.html', {'form': form})
     else:
-        return render(request,'register.html',{'form':SignupForm()})
+        form = SignupForm()
+        return render(request, 'register.html', {'form': form})
+
+
 
 def login(request):
     if request.method == 'POST':
