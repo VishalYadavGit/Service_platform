@@ -209,13 +209,21 @@ def detectit(request):
         pincode=request.POST['pincode']
         optionSelector=request.POST['optionSelector']
         print(user_id,name,email,phone,picture,address,pincode)
-        instance=Booking.objects.create(user_id=user_id,name=name,email=email,phone=phone,picture=picture,address=address,pincode=pincode)
+        instance=Booking.objects.create(user_id=user_id,name=name,email=email,phone=phone,picture=picture,address=address,pincode=pincode,job=optionSelector)
         instance.save()
         if optionSelector=="Plumber":
             products=Service.objects.filter(category='plumber',types='product')
         if optionSelector=="Electrician":
             products=Service.objects.filter(category='electrician',types='product')
         return render(request,'confirmation.html',{'products':products})
+    user = request.user
+    last_object=Booking.objects.filter(user=user).order_by('-created_at').first()
+    if last_object.job=="Plumber":
+        products=Service.objects.filter(category='plumber',types='product')
+    if last_object.job=="Electrician":
+            products=Service.objects.filter(category='electrician',types='product')
+    return render(request,'confirmation.html',{'products':products})
+    
        
 
 def ai(request):

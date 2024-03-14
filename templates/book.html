@@ -32,15 +32,16 @@
         <div class="row">
           <div class="col-md-6 ps-0 mb-3">
             <label class="form-label">Name</label>
-            <input type="text" Name='name' class="form-control shadow-none">
+            <input type="text" Name='name' class="form-control shadow-none" required>
           </div>
           <div class="col-md-6 p-0 mb-3">
             <label class="form-label">Email</label>
-            <input type="email" Name='email' class="form-control shadow-none">
+            <input type="email" Name='email' class="form-control shadow-none" required>
           </div>
           <div class="col-md-6 ps-0 mb-3">
             <label class="form-label">Phone no.</label>
-            <input type="number" Name='phone' class="form-control shadow-none">
+            <input type="tel" Name='phone' class="form-control shadow-none" required pattern="\d{10,13}">
+            <small class="text-muted">Please enter a valid phone number.</small>
           </div>
           {% if form_title == "Book Now" %}
           <div class="col-md-6 p-0 mb-3">
@@ -64,11 +65,13 @@
           {% endif %}
           <div class="col-md-12 p-0 mb-3">
             <label class="form-label">Address</label>
-            <textarea class="form-control shadow-none"  Name='address' rows="1"></textarea>
+            <textarea class="form-control shadow-none"  Name='address' rows="1" required
+            ></textarea>
           </div>
           <div class="col-md-6 ps-0 mb-3">
             <label class="form-label">PinCode</label>
-            <input type="number" Name='pincode' class="form-control shadow-none">
+            <input type="number" Name='pincode' class="form-control shadow-none" required pattern="\d{6}">
+            <small class="text-muted">Please enter a valid 6-digit pincode.</small>
           </div>
           {% if form_title == "Book Now" %}
           <div class="col-md-6 p-0 mb-3">

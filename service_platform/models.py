@@ -33,6 +33,12 @@ class Cart(models.Model):
         return self.service.cost * self.quantity
 
 class Booking(models.Model):
+    JOB_CHOICES = [
+        ('electrician', 'Electrician'),
+        ('plumber', 'Plumber'),
+
+        # Add more categories as needed
+    ]
     user=models.ForeignKey(User,on_delete=models.CASCADE)
     name=models.CharField(max_length=255)
     email=models.EmailField()
@@ -40,3 +46,7 @@ class Booking(models.Model):
     picture=models.ImageField(upload_to='uploads/')
     address=models.CharField(max_length=255)
     pincode=models.IntegerField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    job = models.CharField(max_length=20, choices=JOB_CHOICES, default='electrician')
+    def __str__(self):
+        return self.name
