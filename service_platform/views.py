@@ -1,20 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
-from .forms import SignupForm
-
-from django.contrib import messages
+from .forms import  SignupForm, LoginForm
 from django.http import JsonResponse
 from django.contrib import auth
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth import logout
 from .models import *
-# Create your views here.
-from .forms import  SignupForm, LoginForm
-from .ai import generate_caption
-# views.py
-
 from .models import Service
 from .ai import generate_caption
 
@@ -26,27 +19,23 @@ def about(request):
 
 def contact(request):
     return render(request,'contact.html')
+
+@login_required(login_url='login')
 def fixsolution(request):
     return render(request,'fixsolution.html')
 
-
-# views.py
-from django.db.models import Q
 # views.py
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from .models import Service, Cart
 
-# views.py
-from django.db.models import Q
-
 def product(request):
     category_filter = request.GET.get('category', '')
     search_query = request.GET.get('q', '')
     action = request.GET.get('action')
-
     products = Service.objects.filter(types='product')
     print(products)
+
     if category_filter:
         products = products.filter(category=category_filter)
     
@@ -62,16 +51,13 @@ def product(request):
         # Split descriptions into a list
         product.description_list = product.description.split("\n")
 
-
-
     return render(request, 'product.html', {'products': products, 'category_filter': category_filter, 'search_query': search_query})
+
 def service(request):
     category_filter = request.GET.get('category', '')
     search_query = request.GET.get('q', '')
     action = request.GET.get('action')
-
     services = Service.objects.filter(types='service')
-    
 
     if category_filter:
         services = services.filter(category=category_filter)
@@ -90,9 +76,6 @@ def service(request):
 
     return render(request, 'service.html', {'services': services, 'category_filter': category_filter, 'search_query': search_query})
 
-
-
-
 def add_to_cart(request, service_id):
     service = get_object_or_404(Service, pk=service_id)
     user = request.user
@@ -106,7 +89,6 @@ def add_to_cart(request, service_id):
         cart_item.save()
 
     referring_url = request.META.get('HTTP_REFERER', '/fallback-url/')
-
     return redirect(referring_url)
 
 def remove_item(request, service_id):
@@ -139,7 +121,6 @@ def book(request):
         form_title="Book Now"
         return render(request,'book.html',{'form_type':form_type,'form_title':form_title})
 
-
 def register(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -171,8 +152,6 @@ def register(request):
         form = SignupForm()
         return render(request, 'register.html', {'form': form})
 
-
-
 def login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -192,7 +171,6 @@ def login(request):
         form = LoginForm()
 
     return render(request, 'login.html', {'form': form})
-
 
 def logout(request):
     auth.logout(request)
@@ -224,8 +202,6 @@ def detectit(request):
             products=Service.objects.filter(category='electrician',types='product')
     return render(request,'confirmation.html',{'products':products})
     
-       
-
 def ai(request):
     if request.method == 'POST' and 'file' in request.FILES:
         uploaded_file = request.FILES['file']

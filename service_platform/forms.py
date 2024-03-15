@@ -56,7 +56,7 @@ class SignupForm(forms.Form):
 
 class LoginForm(forms.Form):
     username = forms.CharField(
-        max_length=100,
+        max_length=50,
         widget=forms.TextInput(attrs={"placeholder": "Enter your username"}),
     )
     password = forms.CharField(
